@@ -2,8 +2,8 @@
 //  Extensions.swift
 //  DropIt
 //
-//  Created by CS193p Instructor.
-//  Copyright © 2016 Stanford University. All rights reserved.
+//  Created by Aleksei Neronov on 01.01.17.
+//  Copyright © 2017 Aleksei Neronov. All rights reserved.
 //
 
 import UIKit
