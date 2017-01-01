@@ -40,6 +40,15 @@ class DropItView: UIView, UIDynamicAnimatorDelegate {
         dropBehavior.addItem(drop)
     }
     
+    private struct PathNames {
+        static let MiddlieBarrier = "Middle Barrier"
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let path = UIBezierPath(ovalIn: CGRect(center: bounds.mid, size: dropSize))
+        dropBehavior.addBarrier(path, named: PathNames.MiddlieBarrier)
+    }
     
     // MARK: Remove Completed Row
     

@@ -20,7 +20,7 @@ class FallingObjectBehavior: UIDynamicBehavior
     
     private let itemBehavior: UIDynamicItemBehavior = {
         let dib = UIDynamicItemBehavior()
-        dib.allowsRotation = false
+        dib.allowsRotation = true
         dib.elasticity = 0.75
         return dib
     }()
