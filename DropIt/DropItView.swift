@@ -9,6 +9,7 @@
 import UIKit
 
 class DropItView: NamedBezierPathsView, UIDynamicAnimatorDelegate {
+    private var lastDrop: UIView?
     private let dropBehavior = FallingObjectBehavior()
     private lazy var animator:UIDynamicAnimator = {
         let animator = UIDynamicAnimator(referenceView: self)
@@ -38,6 +39,39 @@ class DropItView: NamedBezierPathsView, UIDynamicAnimatorDelegate {
         drop.backgroundColor = UIColor.random
         addSubview(drop)
         dropBehavior.addItem(drop)
+        lastDrop = drop
+    }
+    
+    func grabDrop(_ recognizer:UIGestureRecognizer) {
+        let gesturePoint = recognizer.location(in: self)
+        switch recognizer.state {
+        case .began:
+            // create attachment
+            if let dropToAttach = lastDrop, dropToAttach.superview != nil {
+                attachment = UIAttachmentBehavior(item: dropToAttach, attachedToAnchor: gesturePoint)
+            }
+            lastDrop = nil
+        case .changed:
+            //create attachment's point
+            attachment?.anchorPoint = gesturePoint
+        default:
+            attachment = nil
+        }
+    }
+    
+    //MARK: Attachment behavior
+    
+    private var attachment: UIAttachmentBehavior? {
+        willSet {
+            if attachment != nil {
+                animator.removeBehavior(attachment!)
+            }
+        }
+        didSet {
+            if attachment != nil {
+                animator.addBehavior(attachment!)
+            }
+        }
     }
     
     //MARK: Add border in center
