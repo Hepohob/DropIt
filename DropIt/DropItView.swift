@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreMotion
 
 class DropItView: NamedBezierPathsView, UIDynamicAnimatorDelegate {
     private var lastDrop: UIView?
@@ -21,6 +22,7 @@ class DropItView: NamedBezierPathsView, UIDynamicAnimatorDelegate {
         didSet {
             if animating {
                 animator.addBehavior(dropBehavior)
+                updateRealGravity()
             } else {
                 animator.removeBehavior(dropBehavior)
             }
@@ -127,6 +129,43 @@ class DropItView: NamedBezierPathsView, UIDynamicAnimatorDelegate {
         for drop in dropsToRemove {
             dropBehavior.removeItem(drop)
             drop.removeFromSuperview()
+        }
+    }
+
+    //MARK: Gravitation
+    
+    private let motionManager = CMMotionManager()
+    
+    var realGravity = false {
+        didSet {
+            updateRealGravity()
+        }
+    }
+    
+    private func updateRealGravity() {
+        if realGravity {
+            if motionManager.isAccelerometerAvailable && !motionManager.isAccelerometerActive {
+                motionManager.accelerometerUpdateInterval = 0.25
+                motionManager.startAccelerometerUpdates(to: OperationQueue.main)
+                { [unowned self] (data, error) in
+                    if self.dropBehavior.dynamicAnimator != nil {
+                        if var dx = data?.acceleration.x, var dy = data?.acceleration.y {
+                            switch UIDevice.current.orientation {
+                            case .portrait: dy = -dy
+                            case .portraitUpsideDown: break
+                            case .landscapeRight: swap(&dx, &dy)
+                            case .landscapeLeft: swap(&dx, &dy); dy = -dy
+                            default: dx = 0; dy = 0;
+                            }
+                            self.dropBehavior.gravity.gravityDirection = CGVector(dx: dx, dy: dy)
+                        }
+                    } else {
+                        self.motionManager.stopAccelerometerUpdates()
+                    }
+                }
+            }
+        } else {
+            motionManager.stopAccelerometerUpdates()
         }
     }
    
