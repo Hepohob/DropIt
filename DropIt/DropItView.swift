@@ -42,6 +42,8 @@ class DropItView: NamedBezierPathsView, UIDynamicAnimatorDelegate {
         lastDrop = drop
     }
     
+    //MARK: Attachment behavior
+    
     func grabDrop(_ recognizer:UIGestureRecognizer) {
         let gesturePoint = recognizer.location(in: self)
         switch recognizer.state {
@@ -59,17 +61,21 @@ class DropItView: NamedBezierPathsView, UIDynamicAnimatorDelegate {
         }
     }
     
-    //MARK: Attachment behavior
-    
     private var attachment: UIAttachmentBehavior? {
         willSet {
             if attachment != nil {
                 animator.removeBehavior(attachment!)
+                bezierPaths[PathNames.Attachment] = nil
             }
         }
         didSet {
             if attachment != nil {
                 animator.addBehavior(attachment!)
+                attachment!.action = { [unowned self] in
+                    if let attachedDrop = self.attachment!.items.first as? UIView {
+                        self.bezierPaths[PathNames.Attachment] = UIBezierPath.lineFrom(self.attachment!.anchorPoint, to: attachedDrop.center)
+                    }
+                }
             }
         }
     }
@@ -78,6 +84,7 @@ class DropItView: NamedBezierPathsView, UIDynamicAnimatorDelegate {
     
     private struct PathNames {
         static let MiddlieBarrier = "Middle Barrier"
+        static let Attachment = "Attachment"
     }
     
     override func layoutSubviews() {
