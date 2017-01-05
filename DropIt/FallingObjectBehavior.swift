@@ -21,7 +21,12 @@ class FallingObjectBehavior: UIDynamicBehavior
     private let itemBehavior: UIDynamicItemBehavior = {
         let dib = UIDynamicItemBehavior()
         dib.allowsRotation = true
-        dib.elasticity = 0.75
+        NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification,
+                                               object: nil,
+                                               queue: nil,
+                                               using: { (notification) in
+                                                dib.elasticity = CGFloat(UserDefaults.standard.float(forKey: "Elasticity_preference"))
+        })
         return dib
     }()
     

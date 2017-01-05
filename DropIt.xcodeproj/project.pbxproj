@@ -16,6 +16,7 @@
 		4765EB991E19A914003FD79B /* UIKit Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4765EB981E19A914003FD79B /* UIKit Extensions.swift */; };
 		4765EB9B1E19B0E1003FD79B /* FallingObjectBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4765EB9A1E19B0E1003FD79B /* FallingObjectBehavior.swift */; };
 		4765EB9D1E19BBEC003FD79B /* NamedBezierPathsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4765EB9C1E19BBEC003FD79B /* NamedBezierPathsView.swift */; };
+		4777FFEB1E1E68AF0028207D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4777FFEA1E1E68AF0028207D /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		4765EB981E19A914003FD79B /* UIKit Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIKit Extensions.swift"; sourceTree = "<group>"; };
 		4765EB9A1E19B0E1003FD79B /* FallingObjectBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FallingObjectBehavior.swift; sourceTree = "<group>"; };
 		4765EB9C1E19BBEC003FD79B /* NamedBezierPathsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamedBezierPathsView.swift; sourceTree = "<group>"; };
+		4777FFEA1E1E68AF0028207D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				4765EB961E19A53D003FD79B /* DropItViewController.swift */,
 				4765EB9A1E19B0E1003FD79B /* FallingObjectBehavior.swift */,
 				4765EB9C1E19BBEC003FD79B /* NamedBezierPathsView.swift */,
+				4777FFEA1E1E68AF0028207D /* Settings.bundle */,
 			);
 			path = DropIt;
 			sourceTree = "<group>";
@@ -144,6 +147,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4777FFEB1E1E68AF0028207D /* Settings.bundle in Resources */,
 				4765EB8C1E19A383003FD79B /* LaunchScreen.storyboard in Resources */,
 				4765EB891E19A383003FD79B /* Assets.xcassets in Resources */,
 				4765EB871E19A383003FD79B /* Main.storyboard in Resources */,
@@ -326,6 +330,7 @@
 				4765EB921E19A383003FD79B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
